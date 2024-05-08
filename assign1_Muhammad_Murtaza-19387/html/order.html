@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Order Form</title>
+  <nav class="navigation">
+    <a href="main.html">Main Menu</a>
+    <a href="owners_bio.html">About Us</a>
+    <a href="contact.html">Contact</a>
+    <a href="order.html">Order</a>
+</nav>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #b30000;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    input[type="number"] {
+      width: 50px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #555;
+    }
+    .error {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Order Form</h1>
+    <form id="orderForm">
+      <label for="cheeseburger">Cheeseburger ($5.00 each)</label>
+      <input type="number" id="cheeseburger" name="cheeseburger" min="0" max="10" value="0" onchange="calculateTotal()">
+      <br>
+      <label for="caesarSalad">Caesar Salad ($7.00 each)</label>
+      <input type="number" id="caesarSalad" name="caesarSalad" min="0" max="10" value="0" onchange="calculateTotal()">
+      <br>
+      <label for="smoothie">Smoothie ($4.00 each)</label>
+      <input type="number" id="smoothie" name="smoothie" min="0" max="10" value="0" onchange="calculateTotal()">
+      <br>
+      <label for="pizza">Pizza ($8.00 each)</label>
+      <input type="number" id="pizza" name="pizza" min="0" max="10" value="0" onchange="calculateTotal()">
+      <br>
+      <label for="friedChicken">Fried Chicken ($6.00 each)</label>
+      <input type="number" id="friedChicken" name="friedChicken" min="0" max="10" value="0" onchange="calculateTotal()">
+      <br>
+      <label>Total:</label>
+      <div id="total"></div>
+      <br>
+      <button type="submit">Submit Order</button>
+    </form>
+    <div id="errorMessage" class="error"></div>
+  </div>
+
+  <script>
+    function calculateTotal() {
+      var cheeseburgerPrice = 5.00;
+      var caesarSaladPrice = 7.00;
+      var smoothiePrice = 4.00;
+      var pizzaPrice = 8.00;
+      var friedChickenPrice = 6.00;
+
+      var cheeseburgerQty = parseInt(document.getElementById('cheeseburger').value);
+      var caesarSaladQty = parseInt(document.getElementById('caesarSalad').value);
+      var smoothieQty = parseInt(document.getElementById('smoothie').value);
+      var pizzaQty = parseInt(document.getElementById('pizza').value);
+      var friedChickenQty = parseInt(document.getElementById('friedChicken').value);
+
+      var total = (cheeseburgerPrice * cheeseburgerQty) + (caesarSaladPrice * caesarSaladQty) +
+                  (smoothiePrice * smoothieQty) + (pizzaPrice * pizzaQty) + (friedChickenPrice * friedChickenQty);
+
+      document.getElementById('total').textContent = "$" + total.toFixed(2);
+    }
+
+    document.getElementById('orderForm').addEventListener('submit', function(event) {
+      var cheeseburger = parseInt(document.getElementById('cheeseburger').value);
+      var caesarSalad = parseInt(document.getElementById('caesarSalad').value);
+      var smoothie = parseInt(document.getElementById('smoothie').value);
+      var pizza = parseInt(document.getElementById('pizza').value);
+      var friedChicken = parseInt(document.getElementById('friedChicken').value);
+
+      if (cheeseburger < 0 || caesarSalad < 0 || smoothie < 0 || pizza < 0 || friedChicken < 0) {
+        document.getElementById('errorMessage').textContent = 'All quantities must be positive numbers.';
+        event.preventDefault();
+      } else if (cheeseburger > 10 || caesarSalad > 10 || smoothie > 10 || pizza > 10 || friedChicken > 10) {
+        document.getElementById('errorMessage').textContent = 'Quantity for each item must be between 0 and 10.';
+        event.preventDefault();
+      } else {
+        document.getElementById('errorMessage').textContent = '';
+      }
+    });
+  </script>
+</body>
+</html>
