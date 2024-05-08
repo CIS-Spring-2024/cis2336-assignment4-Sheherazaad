@@ -1,0 +1,30 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: #b30000;
+    padding: 20px;
+    text-align: center;
+}
+
+.contact-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.triangle {
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 100px solid #b30000;
+}
+
+.text {
+    background-color: #f3f3f3;
+    padding: 20px;
+    text-align: center;
+}
